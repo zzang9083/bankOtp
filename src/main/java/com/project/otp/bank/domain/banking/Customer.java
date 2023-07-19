@@ -1,6 +1,6 @@
-package com.project.otp.bank.entity;
+package com.project.otp.bank.domain.banking;
 
-import com.project.otp.otp.entity.SecurityMedia;
+import com.project.otp.bank.domain.otp.SecurityMedia;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,11 +18,11 @@ public class Customer {
 
     @Id @GeneratedValue
     @Column(name = "cust_id")
-    private Long id;
+    private Long custId;       // 고객 아이디
 
-    private String userName;
+    private String custName;    // 고객명
 
-    private String ebnkDcd; // 뱅킹구분코드
+    private String ebnkDcd;     // 뱅킹구분코드
 
     private char indvCorpDtlDcd; // 개인법인상세구분코드
 

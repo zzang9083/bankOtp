@@ -1,7 +1,6 @@
-package com.project.otp.otp.entity;
+package com.project.otp.bank.domain.otp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.project.otp.bank.entity.Customer;
+import com.project.otp.bank.domain.banking.Customer;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +8,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -35,4 +36,7 @@ public class SecurityMedia {
     @OneToOne
     @JoinColumn(name = "cust_id")
     private Customer customer;      // 고객id(fk)
+
+    @OneToMany(mappedBy = "securityMedia")
+    private List<SecurityMediaHistory> securityMediaHistoryList = new ArrayList<>();
 }
