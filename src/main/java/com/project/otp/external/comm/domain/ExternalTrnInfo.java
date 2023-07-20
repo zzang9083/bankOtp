@@ -1,9 +1,8 @@
-package com.project.otp.external.kftc.otp.comm.dto;
+package com.project.otp.external.comm.domain;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-public class CommInfoReq {
+public class ExternalTrnInfo {
 
     private LocalDate trnYmd; // 거래년월일 8
 

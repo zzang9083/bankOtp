@@ -1,4 +1,4 @@
-package com.project.otp.external.kftc.otp.comm.builder;
+package com.project.otp.external.comm.builder;
 
 import lombok.Builder;
 import lombok.Getter;

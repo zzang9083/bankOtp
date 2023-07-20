@@ -1,6 +1,6 @@
 package com.project.otp.bank.domain.otp;
 
-import com.project.otp.bank.domain.banking.Customer;
+import com.project.otp.bank.domain.bank.Customer;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
