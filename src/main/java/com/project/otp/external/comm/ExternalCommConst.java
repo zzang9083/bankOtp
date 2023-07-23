@@ -1,10 +1,6 @@
 package com.project.otp.external.comm;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
-public class ExternalCommConstant {
+public class ExternalCommConst {
 
     //은행 코드
     public static final String BN_CD_001 = "001";       //한국은행

@@ -2,38 +2,34 @@ package com.project.otp.external.comm.builder;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
+
 
 import java.util.List;
 
-public class ClientRequestFrame {
+public class ClientRequestFrame<Q> {
     @Getter
     private final String host;
     @Getter
     private final String path;
     @Getter
     private final List<ClientRequestHeader> headers;
-    private final List<ClientRequestQueryParam> params;
 
-    public MultiValueMap<String, String> getQueryParam() {
-        MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>();
-        params.forEach(param -> multiValueMap.add(param.queryKey, param.queryValue));
-        return multiValueMap;
-    }
+    private final Q requestBody;
+
 
     @Builder
     public ClientRequestFrame(
             String host,
             String path,
             List<ClientRequestHeader> headers,
-            List<ClientRequestQueryParam> params
+            Q requestBody
     ) {
         this.host = host;
         this.path = path;
         this.headers = headers;
-        this.params = params;
+        this.requestBody = requestBody;
     }
+
 
     @Getter
     public static class ClientRequestHeader {
@@ -47,15 +43,8 @@ public class ClientRequestFrame {
         }
     }
 
-    @Getter
-    public static class ClientRequestQueryParam {
-        private final String queryKey;
-        private final String queryValue;
-
-        @Builder
-        public ClientRequestQueryParam(String queryKey, String queryValue) {
-            this.queryKey = queryKey;
-            this.queryValue = queryValue;
-        }
+    public Q getRequestBody() {
+        return requestBody;
     }
+
 }

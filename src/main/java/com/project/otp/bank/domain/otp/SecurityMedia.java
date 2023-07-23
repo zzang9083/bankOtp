@@ -37,6 +37,6 @@ public class SecurityMedia {
     @JoinColumn(name = "cust_id")
     private Customer customer;      // 고객id(fk)
 
-    @OneToMany(mappedBy = "securityMedia")
+    @OneToMany(mappedBy = "securityMedia") // 보안매체 이력
     private List<SecurityMediaHistory> securityMediaHistoryList = new ArrayList<>();
 }
