@@ -1,8 +1,29 @@
 package com.project.otp.external.comm.domain;
 
+import com.project.otp.bank.domain.bank.Customer;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
+import static javax.persistence.FetchType.LAZY;
+
+// 대외거래이력
+@Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ExternalTrnInfo {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "tlgr_mngm_no")
+    private String tlgrMngmNo; // 거래전문번호 15
+
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "cust_id")
+    private Customer customer; // 고객id
 
     private LocalDate trnYmd; // 거래년월일 8
 
@@ -24,7 +45,6 @@ public class ExternalTrnInfo {
 
     private String tlrcHms; // 전문수신시각 6
 
-    private String trnTlgrSrn; // 거래전문일련번호 8
 
 //    private String rsndHms; // 재전송시각
 

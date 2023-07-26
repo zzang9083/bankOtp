@@ -1,6 +1,7 @@
 package com.project.otp.bank.domain.bank;
 
 import com.project.otp.bank.domain.otp.SecurityMedia;
+import com.project.otp.external.comm.domain.ExternalTrnInfo;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,7 +44,8 @@ public class Customer {
     @OneToMany(mappedBy = "customer", fetch = LAZY, cascade = CascadeType.ALL)
     private List<Account> accountList = new ArrayList<>();  // 계좌목록
 
-
+    @OneToMany(mappedBy = "customer", fetch = LAZY, cascade = CascadeType.ALL)
+    private List<ExternalTrnInfo> externalTrnInfoList = new ArrayList<>();  // 대외거래 목록
 
 
 }

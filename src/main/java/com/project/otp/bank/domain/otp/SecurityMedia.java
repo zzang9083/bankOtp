@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.FetchType.LAZY;
+
 
 @Entity
 @Getter
@@ -19,6 +21,7 @@ import java.util.List;
 public class SecurityMedia {
 
     @Id
+    @Column(name = "secu_cdn")
     private Long secuCdn; // 보안매체 일련번호
 
     @Enumerated(EnumType.STRING)
@@ -36,6 +39,10 @@ public class SecurityMedia {
     @OneToOne
     @JoinColumn(name = "cust_id")
     private Customer customer;      // 고객id(fk)
+
+
+    @OneToOne(mappedBy = "token", fetch = LAZY, cascade = CascadeType.ALL)
+    private Token token;    // 토큰
 
     @OneToMany(mappedBy = "securityMedia") // 보안매체 이력
     private List<SecurityMediaHistory> securityMediaHistoryList = new ArrayList<>();
