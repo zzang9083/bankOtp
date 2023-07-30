@@ -1,6 +1,8 @@
 package com.project.otp.bank.domain.bank;
 
+import com.project.otp.bank.controller.dto.OtpRegDto;
 import com.project.otp.bank.domain.otp.SecurityMedia;
+import com.project.otp.bank.funtion.EncryptionUtils;
 import com.project.otp.external.comm.domain.ExternalTrnInfo;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -48,4 +50,13 @@ public class Customer {
     private List<ExternalTrnInfo> externalTrnInfoList = new ArrayList<>();  // 대외거래 목록
 
 
+    public Customer(String custName, String rnn, String cpn) {
+        this.custName = custName;
+        this.rnn = EncryptionUtils.encryptSHA256(rnn);
+        this.cpn = cpn;
+    }
+
+    public static Customer ofCustomer(OtpRegDto otpRegDto) {
+        return new Customer(otpRegDto.getCustName(), otpRegDto.getRnn(), otpRegDto.getCpn());
+    }
 }

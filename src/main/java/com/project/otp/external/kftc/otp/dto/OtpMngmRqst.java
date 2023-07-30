@@ -1,5 +1,7 @@
 package com.project.otp.external.kftc.otp.dto;
 
+import com.project.otp.external.kftc.otp.comm.domain.OtpCommInfo;
+
 //사고신고, 사고신고 철회, 등록해지, 이용자정보변경, 오류건수 초기화
 public class OtpMngmRqst {
 
@@ -12,6 +14,8 @@ public class OtpMngmRqst {
     private String birtYmd;     // 생년월일
 
     private String rcipTs;      // 접수일시
+
+    private OtpCommInfo OtpCommInfo; // 거래 공통부
 
     public OtpMngmRqst(String prfmNm, String bswrCqrcgNo, String cpn, String birtYmd, String rcipTs) {
         this.prfmNm = prfmNm;

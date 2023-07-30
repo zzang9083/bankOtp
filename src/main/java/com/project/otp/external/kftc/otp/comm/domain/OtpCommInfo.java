@@ -1,6 +1,7 @@
-package com.project.otp.external.kftc.otp.comm;
+package com.project.otp.external.kftc.otp.comm.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -23,5 +24,17 @@ public class OtpCommInfo {
     private String trnTlgrSrn; // 거래전문일련번호 8
 
     private String tlsdHms; // 전문송신시각 6
+
+    @Builder
+    public OtpCommInfo(String extTrnBswrDcd, String tlgrIttcd, String extTrnDcd, String hndlIcd
+                        , String fnbbRpcdNo, String trnTlgrSrn, String tlsdHms) {
+        this.extTrnBswrDcd = extTrnBswrDcd;
+        this.tlgrIttcd = tlgrIttcd;
+        this.extTrnDcd = extTrnDcd;
+        this.hndlIcd = hndlIcd;
+        this.fnbbRpcdNo = fnbbRpcdNo;
+        this.trnTlgrSrn = trnTlgrSrn;
+        this.tlsdHms    = tlsdHms;
+    }
 
 }

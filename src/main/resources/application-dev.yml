@@ -1,0 +1,50 @@
+spring:
+  cache:
+    type: redis
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: false
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:tcp://localhost/~/searchPlace
+#    username: sa
+#    password: sa
+#    hikari:
+#      maximum-pool-size: 40
+
+# swaggerdoc
+#springdoc:
+#  version: v1.0.0
+#  packages-to-scan: com.search
+#  swagger-ui:
+#    path: /api-docs
+#    tags-sorter: alpha
+#    operations-sorter: alpha
+#  api-docs:
+#    path: /api-docs/json
+#    groups:
+#      enabled: true
+#  cache:
+#    disabled: true
+#  default-consumes-media-type: application/json;charset=UTF-8
+#  default-produces-media-type: application/json;charset=UTF-8
+
+api:
+  kftc:
+    otp:
+      host: "https://dapi.kakao.com"
+      apiKey: "50d28f6653163fb835fe5931f9cf3ed3"
+
+function:
+  priorities:
+    - kakao
+    - naver
+
+#lock:
+#  key: RECORD_LOCK

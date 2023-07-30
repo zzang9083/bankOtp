@@ -1,21 +1,13 @@
 package com.project.otp.external.comm.builder;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.otp.external.comm.builder.ClientRequestFrame;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.project.otp.external.comm.domain.ApiInfo;
 import org.springframework.http.HttpStatus;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
-
-import java.util.Map;
 
 public abstract class ClientMonoBuilder {
-    public<Q,R> R buildFor(Q requestDto, Class<R> responseDto) {
-        //MultiValueMap<String, String> dtoMap = convertDtoToMap(req);
-        ClientRequestFrame clientRequestFrame = frameOf(requestDto);
+    public<Q,R> R buildFor(ApiInfo apiInfo, Q requestDto, Class<R> responseDto) {
+
+        ClientRequestFrame clientRequestFrame = frameOf(apiInfo, requestDto);
         return buildMonoToPost(clientRequestFrame, responseDto);
 
     }
@@ -34,7 +26,7 @@ public abstract class ClientMonoBuilder {
                 .bodyToMono(responseDto)
                 .block();
     }
-    protected abstract<Q> ClientRequestFrame frameOf(Q requestDto);
+    protected abstract<Q> ClientRequestFrame frameOf(ApiInfo apiInfo, Q requestDto);
     protected abstract Class<? extends PlaceResponse> supportType();
 
 }
