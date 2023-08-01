@@ -2,8 +2,8 @@ package com.project.otp.external.kftc.otp.dto;
 
 import com.project.otp.bank.domain.bank.Customer;
 import com.project.otp.external.comm.ExternalCommConst;
-import com.project.otp.external.kftc.otp.comm.domain.OtpCommInfo;
-import com.project.otp.external.kftc.otp.comm.domain.OtpConst;
+import com.project.otp.external.kftc.otp.dto.comm.OtpCommInfo;
+import com.project.otp.external.kftc.otp.dto.comm.OtpConst;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +13,8 @@ public class OtpRegRqstRqst {
     private String prfmNm;      // 전문성명
 
     private String bswrCqrcgNo; // 업무고유식별번호
+
+    private Long secuCdn;       // 보안매체 일련번호
 
     private String cpn;         // 휴대번호
 
@@ -25,6 +27,7 @@ public class OtpRegRqstRqst {
     public OtpRegRqstRqst(Customer customer) {
         this.prfmNm         = customer.getCustName();
         this.bswrCqrcgNo    = customer.getRnn();
+        this.secuCdn        = customer.get
         this.cpn            = customer.getCpn();
         this.birtYmd        = customer.getBirth();
         this.rgsnTs         = LocalDateTime.now().toString();

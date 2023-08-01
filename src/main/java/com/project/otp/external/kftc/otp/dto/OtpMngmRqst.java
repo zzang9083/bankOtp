@@ -1,6 +1,6 @@
 package com.project.otp.external.kftc.otp.dto;
 
-import com.project.otp.external.kftc.otp.comm.domain.OtpCommInfo;
+import com.project.otp.external.kftc.otp.dto.comm.OtpCommInfo;
 
 //사고신고, 사고신고 철회, 등록해지, 이용자정보변경, 오류건수 초기화
 public class OtpMngmRqst {

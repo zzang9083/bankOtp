@@ -1,4 +1,4 @@
-package com.project.otp.external.kftc.otp.comm.domain;
+package com.project.otp.external.kftc.otp.dto.comm;
 
 import lombok.AccessLevel;
 import lombok.Builder;

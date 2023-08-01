@@ -4,7 +4,7 @@ package com.project.otp.bank.controller.dto;
 import lombok.Getter;
 
 @Getter
-public class OtpRegDto {
+public class OtpRegRqst {
 
     private String custName;    // 고객명
 

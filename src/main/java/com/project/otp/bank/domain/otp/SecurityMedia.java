@@ -1,12 +1,10 @@
 package com.project.otp.bank.domain.otp;
 
 import com.project.otp.bank.domain.bank.Customer;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +20,7 @@ public class SecurityMedia {
 
     @Id
     @Column(name = "secu_cdn")
+    @GeneratedValue
     private Long secuCdn; // 보안매체 일련번호
 
     @Enumerated(EnumType.STRING)
@@ -30,13 +29,11 @@ public class SecurityMedia {
     @Enumerated(EnumType.STRING)
     private SecurityMediaStatus sccdScd; // 보안매체 상태코드
 
-    private String isncYmd; // 발급년월일
-
-    private String sysLsmdId; // 최종변경ID
+    private LocalDate isncYmd; // 발급년월일
 
     private LocalDateTime sysLsmdTs; // 최종변경시간
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "cust_id")
     private Customer customer;      // 고객id(fk)
 
@@ -46,4 +43,14 @@ public class SecurityMedia {
 
     @OneToMany(mappedBy = "securityMedia") // 보안매체 이력
     private List<SecurityMediaHistory> securityMediaHistoryList = new ArrayList<>();
+
+
+    @Builder
+    public SecurityMedia(SecurityMediaType secuType, SecurityMediaStatus sccdScd, LocalDate isncYmd, LocalDateTime sysLsmdTs, Customer customer) {
+        this.secuType = secuType;
+        this.sccdScd = sccdScd;
+        this.isncYmd = isncYmd;
+        this.sysLsmdTs = sysLsmdTs;
+        this.customer = customer;
+    }
 }

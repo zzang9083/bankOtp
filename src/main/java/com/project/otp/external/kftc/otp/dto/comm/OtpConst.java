@@ -1,4 +1,4 @@
-package com.project.otp.external.kftc.otp.comm.domain;
+package com.project.otp.external.kftc.otp.dto.comm;
 
 import com.project.otp.external.comm.ExternalCommConst;
 
@@ -29,8 +29,8 @@ public class OtpConst {
             ));
 
     // OTP API PATH
-    public static final String OTP_API_PATH_OTP_REG   = "/otp/reg";             // 거래구분코드 OTP등록 요청
-
+    public static final String OTP_API_PATH_OTP_REG   = "/otp/register";             // 거래구분코드 OTP등록 요청
+    public static final String OTP_API_PATH_OTP_TMN   = "/otp/terminate";            // 거래구분코드 OTP해지 요청
 
 
     // 대외거래구분코드

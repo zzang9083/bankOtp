@@ -1,6 +1,6 @@
 package com.project.otp.external.kftc.otp.dto;
 
-import com.project.otp.external.kftc.otp.comm.domain.OtpCommInfo;
+import com.project.otp.external.kftc.otp.dto.comm.OtpCommInfo;
 
 // 등록요청
 public class OtpRegRqstRspn {

@@ -1,7 +1,8 @@
 package com.project.otp.bank.controller.otp;
 
-import com.project.otp.bank.controller.dto.OtpRegDto;
+import com.project.otp.bank.controller.dto.OtpRegRqst;
 import com.project.otp.bank.domain.bank.Customer;
+import com.project.otp.external.kftc.otp.dto.OtpRegRqstRspn;
 import com.project.otp.external.kftc.otp.service.OtpRegService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +20,8 @@ public class OtpRegController {
     }
 
     @PostMapping("/register")
-    public void regOtp(@RequestBody OtpRegDto otpRegDto) {
-        otpRegService.reqOtpRegReq(Customer.ofCustomer(otpRegDto));
+    public void regOtp(@RequestBody OtpRegRqst otpRegRqst) {
+        OtpRegRqstRspn otpRegRqstRspn = otpRegService.reqOtpRegReq(Customer.ofCustomer(otpRegRqst));
 
     }
 
