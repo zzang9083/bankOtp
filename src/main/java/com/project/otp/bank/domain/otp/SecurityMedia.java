@@ -38,8 +38,8 @@ public class SecurityMedia {
     private Customer customer;      // 고객id(fk)
 
 
-    @OneToOne(mappedBy = "token", fetch = LAZY, cascade = CascadeType.ALL)
-    private Token token;    // 토큰
+    @OneToMany(mappedBy = "token", fetch = LAZY, cascade = CascadeType.ALL)
+    private List<Token> token;    // 토큰
 
     @OneToMany(mappedBy = "securityMedia") // 보안매체 이력
     private List<SecurityMediaHistory> securityMediaHistoryList = new ArrayList<>();
@@ -52,5 +52,23 @@ public class SecurityMedia {
         this.isncYmd = isncYmd;
         this.sysLsmdTs = sysLsmdTs;
         this.customer = customer;
+    }
+
+    public static SecurityMedia makeDigitalOtp(SecurityMediaType secuType, Customer customer) {
+        SecurityMedia newSecurityMedia = SecurityMedia.builder()
+                                            .secuType(secuType)
+                                            .sccdScd(SecurityMediaStatus.REGISTER)
+                                            .isncYmd(LocalDate.now())
+                                            .sysLsmdTs(LocalDateTime.now())
+                                            .customer(customer)
+                                            .build();
+
+        customer.getSecurityMedia().add(newSecurityMedia);
+
+        return newSecurityMedia;
+    }
+
+    public void addToken() {
+
     }
 }

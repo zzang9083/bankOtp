@@ -1,6 +1,7 @@
 package com.project.otp.external.kftc.otp.dto;
 
 import com.project.otp.bank.domain.bank.Customer;
+import com.project.otp.bank.domain.otp.SecurityMedia;
 import com.project.otp.external.comm.ExternalCommConst;
 import com.project.otp.external.kftc.otp.dto.comm.OtpCommInfo;
 import com.project.otp.external.kftc.otp.dto.comm.OtpConst;
@@ -24,10 +25,10 @@ public class OtpRegRqstRqst {
 
     private OtpCommInfo OtpCommInfo; // 거래 공통부
 
-    public OtpRegRqstRqst(Customer customer) {
+    public OtpRegRqstRqst(Customer customer, SecurityMedia newOtp) {
         this.prfmNm         = customer.getCustName();
         this.bswrCqrcgNo    = customer.getRnn();
-        this.secuCdn        = customer.get
+        this.secuCdn        = newOtp.getSecuCdn();
         this.cpn            = customer.getCpn();
         this.birtYmd        = customer.getBirth();
         this.rgsnTs         = LocalDateTime.now().toString();
@@ -48,8 +49,8 @@ public class OtpRegRqstRqst {
 
 
 
-    public static OtpRegRqstRqst ofOtpRegRqstRqst(Customer customer) {
-        return new OtpRegRqstRqst(customer);
+    public static OtpRegRqstRqst ofOtpRegRqstRqst(Customer customer, SecurityMedia newOtp) {
+        return new OtpRegRqstRqst(customer, newOtp);
     }
 
 

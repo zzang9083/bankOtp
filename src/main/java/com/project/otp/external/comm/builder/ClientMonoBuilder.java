@@ -1,6 +1,6 @@
 package com.project.otp.external.comm.builder;
 
-import com.project.otp.external.comm.domain.ApiInfo;
+import com.project.otp.external.kftc.otp.dto.comm.ApiInfo;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.reactive.function.client.WebClient;
 

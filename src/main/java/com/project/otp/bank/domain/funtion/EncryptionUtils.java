@@ -1,4 +1,4 @@
-package com.project.otp.bank.funtion;
+package com.project.otp.bank.domain.funtion;
 
 import java.security.MessageDigest;
 

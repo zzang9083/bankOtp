@@ -1,4 +1,4 @@
-package com.project.otp.external.comm.domain;
+package com.project.otp.external.kftc.otp.dto.comm;
 
 import lombok.Builder;
 import lombok.Getter;

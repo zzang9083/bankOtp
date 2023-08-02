@@ -1,4 +1,4 @@
-package com.project.otp.bank.controller.error.exception;
+package com.project.otp.bank.presentation.error.exception;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;

@@ -1,10 +1,10 @@
 package com.project.otp.bank.domain.bank;
 
-import com.project.otp.bank.controller.dto.OtpRegRqst;
+import com.project.otp.bank.presentation.dto.OtpRegRqst;
 import com.project.otp.bank.domain.otp.SecurityMedia;
 import com.project.otp.bank.domain.otp.SecurityMediaStatus;
 import com.project.otp.bank.domain.otp.SecurityMediaType;
-import com.project.otp.bank.funtion.EncryptionUtils;
+import com.project.otp.bank.domain.funtion.EncryptionUtils;
 import com.project.otp.external.comm.domain.ExternalTrnInfo;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -65,13 +65,7 @@ public class Customer {
 
     public SecurityMedia issueSecurityMedia(SecurityMediaType secuType, Customer customer) {
 
-        SecurityMedia newSecuMedia= SecurityMedia.builder()
-                                    .secuType(secuType)
-                                    .sccdScd(SecurityMediaStatus.REGISTER)
-                                    .isncYmd(LocalDate.now())
-                                    .sysLsmdTs(LocalDateTime.now())
-                                    .customer(customer)
-                                    .build();
+
 
         this.securityMedia.add(newSecuMedia);
 

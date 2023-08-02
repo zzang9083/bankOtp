@@ -2,7 +2,7 @@ package com.project.otp.external.kftc.otp;
 
 import com.project.otp.external.comm.builder.ClientMonoBuilder;
 import com.project.otp.external.comm.builder.ClientRequestFrame;
-import com.project.otp.external.comm.domain.ApiInfo;
+import com.project.otp.external.kftc.otp.dto.comm.ApiInfo;
 import com.project.otp.external.kftc.otp.comm.domain.OtpApiInfo;
 import org.springframework.stereotype.Component;
 

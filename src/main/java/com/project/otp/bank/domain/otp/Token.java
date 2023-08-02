@@ -6,10 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -31,8 +28,8 @@ public class Token {
 
     private LocalDateTime sysLsmdTs; // 최종변경시간
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "secu_cdn")
-    private SecurityMedia customer;      // 고객id(fk)
+    private SecurityMedia securityMedia;      // 보안매체
 
 }

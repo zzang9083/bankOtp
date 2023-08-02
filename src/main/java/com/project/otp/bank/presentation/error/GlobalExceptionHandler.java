@@ -1,4 +1,4 @@
-package com.project.otp.bank.controller.error;
+package com.project.otp.bank.presentation.error;
 
 
 import com.project.otp.bank.domain.error.BusinessException;

@@ -1,4 +1,4 @@
-package com.project.otp.bank.controller.dto;
+package com.project.otp.bank.presentation.dto;
 
 
 import lombok.Getter;
