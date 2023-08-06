@@ -1,22 +1,31 @@
 spring:
-  cache:
-    type: redis
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:tcp://localhost/~/bank
+      driver-class-name: org.h2.Driver
+      username: sa
+      password:
+
   jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create
-    show-sql: false
-  data:
-    redis:
-      host: localhost
-      port: 6379
 
-#  datasource:
-#    driver-class-name: org.h2.Driver
-#    url: jdbc:h2:tcp://localhost/~/searchPlace
-#    username: sa
-#    password: sa
-#    hikari:
-#      maximum-pool-size: 40
+  # 로그 레벨 설정
+  logging:
+    level:
+      org.hibernate.SQL: debug
+      org.hibernate.type: trace
+
 
 # swaggerdoc
 #springdoc:
@@ -35,16 +44,6 @@ spring:
 #  default-consumes-media-type: application/json;charset=UTF-8
 #  default-produces-media-type: application/json;charset=UTF-8
 
-api:
-  kftc:
-    otp:
-      host: "https://dapi.kakao.com"
-      apiKey: "50d28f6653163fb835fe5931f9cf3ed3"
-
-function:
-  priorities:
-    - kakao
-    - naver
 
 #lock:
 #  key: RECORD_LOCK

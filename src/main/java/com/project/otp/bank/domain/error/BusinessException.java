@@ -1,5 +1,8 @@
 package com.project.otp.bank.domain.error;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class BusinessException extends RuntimeException {
 
     private ErrorCode errorCode;
