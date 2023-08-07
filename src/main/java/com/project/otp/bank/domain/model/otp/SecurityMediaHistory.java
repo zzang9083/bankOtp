@@ -1,5 +1,6 @@
 package com.project.otp.bank.domain.model.otp;
 
+import com.project.otp.bank.domain.model.external.ExternalTrnId;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -17,16 +19,18 @@ import static javax.persistence.FetchType.LAZY;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SecurityMediaHistory {
 
-    @Id
-    @GeneratedValue
-    private long trnSrn;      // 거래일련번호
+    @EmbeddedId
+    private SecurityMediaHistoryId securityMediaHistoryId;
 
-
+    @MapsId("secuCdn") //SecurityMediaHistoryId.secuCdn 매핑
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "secu_cdn")   // 보안매체 일련번호
     private SecurityMedia securityMedia;
 
 
+    @Enumerated(EnumType.STRING)
+    private SecurityMediaStatus sccdScd; // 보안매체 상태코드
 
-    private LocalDate trnYmd; // 거래년월일
+    private LocalDateTime trnTs; // 최종변경시간
+
 }
