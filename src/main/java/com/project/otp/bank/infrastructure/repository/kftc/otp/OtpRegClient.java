@@ -32,14 +32,10 @@ public class OtpRegClient implements Serializable {
         //요청부 조립
         OtpRegRqstRqst otpRegRqstRqst = OtpRegRqstRqst.ofOtpRegRqstRqst(customer, newOtp);
 
-        // 거래 이력 생성(요청)
-
         //otp 등록요청
         OtpRegRqstRspn otpRegRqstRspn
                 = clientMonoBuilders.buildFor(regApiInfo, otpRegRqstRqst, OtpRegRqstRspn.class);
 
-
-        // 거래 이력 생성(응답)
 
         // 응답 공통부 체크
         try {
