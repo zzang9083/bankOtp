@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.*;
@@ -29,7 +30,7 @@ public class Customer {
 
     private String rnn; // 실명번호(사업자번호)
 
-    private String  birth; // 생년월일
+    private LocalDate birtYmd; // 생년월일
 
     private String cpn;     // 핸드폰번호
 
@@ -51,7 +52,8 @@ public class Customer {
 
     public Customer(String custName, String rnn, String cpn) {
         this.custName = custName;
-        this.rnn = EncryptionUtils.encryptSHA256(rnn);
+        //this.rnn = EncryptionUtils.encryptSHA256(rnn);
+        this.rnn = rnn;
         this.cpn = cpn;
     }
 

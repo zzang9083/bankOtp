@@ -5,10 +5,13 @@ import com.project.otp.bank.domain.model.otp.SecurityMedia;
 import com.project.otp.bank.domain.model.external.ExternalCommConst;
 import com.project.otp.bank.infrastructure.client.builder.otp.comm.OtpCommInfo;
 import com.project.otp.bank.infrastructure.client.builder.otp.comm.OtpConst;
+import lombok.Getter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 // 등록요청
+@Getter
 public class OtpRegRqstRqst {
 
     private String prfmNm;      // 전문성명
@@ -19,9 +22,9 @@ public class OtpRegRqstRqst {
 
     private String cpn;         // 휴대번호
 
-    private String birtYmd;     // 생년월일
+    private LocalDate birtYmd;     // 생년월일
 
-    private String rgsnTs;      // 등록일시
+    private LocalDateTime rgsnTs;      // 등록일시
 
     private OtpCommInfo OtpCommInfo; // 거래 공통부
 
@@ -30,8 +33,8 @@ public class OtpRegRqstRqst {
         this.bswrCqrcgNo    = customer.getRnn();
         this.secuCdn        = newOtp.getSecuCdn();
         this.cpn            = customer.getCpn();
-        this.birtYmd        = customer.getBirth();
-        this.rgsnTs         = LocalDateTime.now().toString();
+        this.birtYmd        = customer.getBirtYmd();
+        this.rgsnTs         = LocalDateTime.now();
         this.OtpCommInfo    = setOtpCommInfo();
 
     }

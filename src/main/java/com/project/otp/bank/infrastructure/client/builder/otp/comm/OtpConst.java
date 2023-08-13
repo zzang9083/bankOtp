@@ -8,30 +8,27 @@ import java.util.Set;
 
 public class OtpConst {
 
+    //거래은행코드
+    public static final Set<String> BN_CD = new HashSet<String>(
+            Arrays.asList(ExternalCommConst.BN_CD_001    //한국은행
+                    , ExternalCommConst.BN_CD_002    //한국산업은행
+                    , ExternalCommConst.BN_CD_003    //중소기업은행은행
+                    , ExternalCommConst.BN_CD_004    //국민은행
+                    , ExternalCommConst.BN_CD_005    //하나은행
+                    , ExternalCommConst.BN_CD_006    //국민은행
+                    , ExternalCommConst.BN_CD_007    //수협은행
+                    , ExternalCommConst.BN_CD_008    //한국수출입은행
+                    , ExternalCommConst.BN_CD_009    //수협은행
+                    , ExternalCommConst.BN_CD_010    //농협은행
+            ));
+
+
     //otp 공동센터 HOST URL
     public static final String OTP_HOST_URL = "http://localhost:8081/";
 
     //otp 공동센터 PATH URL
-    public static final String OTP_PATH_REG = "/otp/reg";
-
-    //거래은행코드
-    public static final Set<String> BN_CD = new HashSet<String>(
-            Arrays.asList(ExternalCommConst.BN_CD_001    //한국은행
-                        , ExternalCommConst.BN_CD_002    //한국산업은행
-                        , ExternalCommConst.BN_CD_003    //중소기업은행은행
-                        , ExternalCommConst.BN_CD_004    //국민은행
-                        , ExternalCommConst.BN_CD_005    //하나은행
-                        , ExternalCommConst.BN_CD_006    //국민은행
-                        , ExternalCommConst.BN_CD_007    //수협은행
-                        , ExternalCommConst.BN_CD_008    //한국수출입은행
-                        , ExternalCommConst.BN_CD_009    //수협은행
-                        , ExternalCommConst.BN_CD_010    //농협은행
-            ));
-
-    // OTP API PATH
-    public static final String OTP_API_PATH_OTP_REG   = "/otp/register";             // 거래구분코드 OTP등록 요청
-    public static final String OTP_API_PATH_OTP_TMN   = "/otp/terminate";            // 거래구분코드 OTP해지 요청
-
+    public static final String OTP_API_PATH_OTP_REG   = "/kftc/otp/register";             // 거래구분코드 OTP등록 요청
+    public static final String OTP_API_PATH_OTP_TMN   = "/kftc/otp/terminate";            // 거래구분코드 OTP해지 요청
 
     // 대외거래구분코드
     public static final String OTP_TRN_DSNC_NO_100101   = "100101";             // 거래구분코드 OTP등록 요청

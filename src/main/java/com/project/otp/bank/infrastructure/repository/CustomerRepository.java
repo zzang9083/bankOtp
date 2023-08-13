@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-    @EntityGraph(attributePaths = {"securityMedia"})
+    //@EntityGraph(attributePaths = {"securityMedia"})
     Optional<Customer> findOptionalCustomerByRnn(String rnn);
 }

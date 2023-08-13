@@ -9,10 +9,12 @@ import com.project.otp.bank.infrastructure.client.builder.otp.comm.OtpConst;
 import com.project.otp.bank.infrastructure.client.builder.otp.dto.OtpRegRqstRspn;
 import com.project.otp.bank.infrastructure.entity.OtpRegEntity;
 import com.project.otp.bank.infrastructure.client.builder.otp.dto.OtpRegRqstRqst;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
+@Slf4j
 @Component
 public class OtpRegClient implements Serializable {
 
@@ -27,7 +29,7 @@ public class OtpRegClient implements Serializable {
         //API 정보 조립
         ApiInfo regApiInfo = ApiInfo.builder()
                                 .host(OtpConst.OTP_HOST_URL)
-                                .path(OtpConst.OTP_PATH_REG).build();
+                                .path(OtpConst.OTP_API_PATH_OTP_REG).build();
 
         //요청부 조립
         OtpRegRqstRqst otpRegRqstRqst = OtpRegRqstRqst.ofOtpRegRqstRqst(customer, newOtp);
