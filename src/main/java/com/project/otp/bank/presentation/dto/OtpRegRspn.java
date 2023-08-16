@@ -1,6 +1,5 @@
 package com.project.otp.bank.presentation.dto;
 
-import com.project.otp.bank.domain.model.bank.Customer;
 import com.project.otp.bank.domain.model.otp.Token;
 
 public class OtpRegRspn {

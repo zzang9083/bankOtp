@@ -1,25 +1,27 @@
 package com.project.otp.bank.presentation.controller;
 
-import com.project.otp.bank.application.service.CustomerService;
-import com.project.otp.bank.domain.model.otp.Token;
+import com.project.otp.bank.application.securityMedia.SecurityMediaFacade;
+import com.project.otp.bank.domain.securityMedia.dto.SecurityMediaCommand;
 import com.project.otp.bank.presentation.dto.OtpRegRqst;
-import com.project.otp.bank.domain.model.bank.Customer;
 import com.project.otp.bank.presentation.dto.OtpRegRspn;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/bank/otp")
 public class OtpRegController {
 
-    private final CustomerService customerService;
+    private final SecurityMediaFacade securityMediaFacade;
 
-    public OtpRegController(CustomerService customerService) {
-        this.customerService = customerService;
+    public OtpRegController(SecurityMediaFacade securityMediaFacade) {
+        this.securityMediaFacade = securityMediaFacade;
     }
 
     @PostMapping("/register")
-    public OtpRegRspn regOtp(@RequestBody OtpRegRqst otpRegRqst) {
-        Token token = customerService.regiterDigitalOtp(Customer.ofCustomer(otpRegRqst));
+    public OtpRegRspn registerOtp(@RequestBody @Valid OtpRegRqst otpRegRqst) {
+        SecurityMediaCommand.RegisterSecurityMediaRequest registerOtpRequest = otpRegRqst.toCommand();
+        Token token = securityMediaFacade.registerOtp(registerOtpRequest);
 
         return OtpRegRspn.of(otpRegRqst, token);
 

@@ -1,7 +1,7 @@
 package com.project.otp.bank.infrastructure.entity;
 
-import com.project.otp.bank.domain.model.otp.Token;
-import com.project.otp.bank.infrastructure.client.builder.otp.comm.OtpCommInfo;
+import com.project.otp.bank.domain.securityMedia.model.Token;
+import com.project.otp.bank.infrastructure.external.client.builder.otp.comm.OtpCommInfo;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
