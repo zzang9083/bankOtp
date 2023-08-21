@@ -17,7 +17,7 @@ public class SecurityMediaCommand {
     @Getter
     @Builder
     @ToString
-    public static class RegisterSecurityMediaRequest {
+    public static class RegisterSecurityMediaRequest { // 등록요청
 
         private String custName;    // 고객명
         private String rnn;         // 실명번호(사업자번호)
@@ -33,9 +33,45 @@ public class SecurityMediaCommand {
                     .customer(customer)
                     .build();
         }
+    }
 
+    @Getter
+    @Builder
+    @ToString
+    public static class ActivateOtpStepFirst { // 1차 활성화 요청
 
+        private Long custId;       // 고객아이디
 
+        private String trnContent; // 거래내역
+
+        public ActivateOtpStepFirstToExternal toApiCommand(String rnn, Long secuCdn) {
+            return ActivateOtpStepFirstToExternal.builder()
+                    .secuCdn(secuCdn)
+                    .rnn(rnn)
+                    .trnContent(trnContent)
+                    .build();
+        }
+    }
+
+    @Getter
+    @Builder
+    @ToString
+    public static class ActivateOtpStepFirstToExternal { // 1차 활성화 대외요청
+
+        private String rnn;         // 고객아이디
+        private Long secuCdn;       // 보안매체번호
+        private String trnContent;  // 거래내용
+
+        public SecurityMedia toEntity(SecurityMediaType secuType, Customer customer) {
+            return SecurityMedia.builder()
+                    .secuType(secuType)
+                    .sccdScd(SecurityMediaStatus.REGISTER)
+                    .isncYmd(LocalDate.now())
+                    .expyYmd(LocalDate.of(9999,12,31))
+                    .sysLsmdTs(LocalDateTime.now())
+                    .customer(customer)
+                    .build();
+        }
     }
 
 }

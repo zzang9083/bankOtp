@@ -1,7 +1,7 @@
 package com.project.otp.bank.infrastructure.customer;
 
 import com.project.otp.bank.domain.customer.model.Customer;
-import com.project.otp.bank.domain.customer.service.CustomerReader;
+import com.project.otp.bank.domain.customer.repository.CustomerReader;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -12,6 +12,12 @@ import org.springframework.stereotype.Component;
 public class CustomerReaderImpl implements CustomerReader {
 
     private final CustomerRepository customerRepository;
+
+    @Override
+    public Customer findCustomerById(Long id) {
+        return customerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("존재하지 않는 사용자"));
+    }
 
     @Override
     public Customer findCustomerByRnn(String rnn) {

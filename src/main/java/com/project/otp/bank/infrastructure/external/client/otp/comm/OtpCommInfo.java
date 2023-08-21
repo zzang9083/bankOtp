@@ -1,4 +1,4 @@
-package com.project.otp.bank.infrastructure.external.client.builder.otp.comm;
+package com.project.otp.bank.infrastructure.external.client.otp.comm;
 
 import lombok.AccessLevel;
 import lombok.Builder;

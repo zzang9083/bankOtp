@@ -1,4 +1,4 @@
-package com.project.otp.bank.infrastructure.external.client.frame;
+package com.project.otp.bank.infrastructure.external.client.comm.builder;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -17,8 +17,8 @@ public class OtpRegRqst {
     @NotEmpty(message = "cpn 는 필수값입니다")
     private String cpn;         // 휴대번호
 
-    public SecurityMediaCommand.RegisterOtpRequest toCommand() {
-        return SecurityMediaCommand.RegisterOtpRequest.builder()
+    public SecurityMediaCommand.RegisterSecurityMediaRequest toCommand() {
+        return SecurityMediaCommand.RegisterSecurityMediaRequest.builder()
                 .custName(custName)
                 .rnn(rnn)
                 .cpn(cpn)

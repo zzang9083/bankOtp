@@ -1,8 +1,8 @@
-package com.project.otp.bank.infrastructure.external.client.builder.otp;
+package com.project.otp.bank.infrastructure.external.client.otp;
 
-import com.project.otp.bank.infrastructure.external.client.builder.ClientMonoBuilder;
-import com.project.otp.bank.infrastructure.external.client.builder.otp.comm.ApiInfo;
-import com.project.otp.bank.infrastructure.external.client.frame.ClientRequestFrame;
+import com.project.otp.bank.infrastructure.external.client.comm.builder.ClientMonoBuilder;
+import com.project.otp.bank.infrastructure.external.client.comm.builder.ApiInfo;
+import com.project.otp.bank.infrastructure.external.client.comm.builder.ClientRequestFrame;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;

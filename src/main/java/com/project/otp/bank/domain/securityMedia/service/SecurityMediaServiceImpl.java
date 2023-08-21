@@ -1,13 +1,15 @@
 package com.project.otp.bank.domain.securityMedia.service;
 
 import com.project.otp.bank.domain.customer.model.Customer;
-import com.project.otp.bank.domain.customer.service.CustomerReader;
-import com.project.otp.bank.domain.external.repository.ExternalRepository;
+import com.project.otp.bank.domain.customer.repository.CustomerReader;
+import com.project.otp.bank.domain.external.service.ExternalClientService;
 import com.project.otp.bank.domain.securityMedia.dto.SecurityMediaCommand;
+import com.project.otp.bank.domain.securityMedia.dto.SecurityMediaInfo;
 import com.project.otp.bank.domain.securityMedia.model.SecurityMedia;
 import com.project.otp.bank.domain.securityMedia.model.SecurityMediaType;
 import com.project.otp.bank.domain.securityMedia.model.Token;
 import com.project.otp.bank.domain.securityMedia.repsitory.SecurityMediaStore;
+import com.project.otp.bank.domain.securityMedia.repsitory.TokenStore;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,23 +22,46 @@ public class SecurityMediaServiceImpl implements SecurityMediaService {
 
     private final CustomerReader customerReader;
     private final SecurityMediaStore securityMediaStore;
-    private final ExternalRepository externalRepository;
+
+    private final TokenStore tokenStore;
+    private final ExternalClientService externalClientService;
 
     @Override
     @Transactional
-    public Customer makeSecurityMedia(SecurityMediaCommand.RegisterSecurityMediaRequest req, SecurityMediaType type) {
+    public SecurityMediaInfo.Main issueSecurityMedia(SecurityMediaCommand.RegisterSecurityMediaRequest req, SecurityMediaType type) {
 
-        // 요청고객 FIND
+        // 요청고객 찾기
         Customer customer = customerReader.findCustomerByRnn(req.getRnn());
+
+        SecurityMedia newOtp = null;
 
         if(!customer.existActiveSecurityMedia()) {
             // otp 신규
             SecurityMedia initOtp = req.toEntity(SecurityMediaType.DIGITAL_OTP, customer);
-            SecurityMedia newOtp  = securityMediaStore.store(initOtp);
+            newOtp  = securityMediaStore.store(initOtp);
 
             // 토큰 발급 요청
-            Token newToken =  externalRepository.reqOtpReg(customer, newOtp);
+            Token newToken = externalClientService.getToken(customer, newOtp);
+            newOtp.addToken(newToken);
+            tokenStore.store(newToken);
         }
-        return null;
+        return new SecurityMediaInfo.Main(newOtp);
+    }
+
+    @Override
+    @Transactional
+    public void activateOtpStepFirst(SecurityMediaCommand.ActivateOtpStepFirst req) {
+        // 요청고객 FIND
+        Customer customer = customerReader.findCustomerById(req.getCustId());
+
+        // 유효 디지털 otp FIND
+        SecurityMedia activeOtp = customer.getActiveSecurityMedia(SecurityMediaType.DIGITAL_OTP);
+
+        // 대외거래 요청부 조립
+        SecurityMediaCommand.ActivateOtpStepFirstToExternal externalReq
+                = req.toApiCommand(customer.getRnn(), activeOtp.getSecuCdn());
+
+        // 1차 활성화 요청
+        externalClientService.reqActivateOtpStepFirst(externalReq);
     }
 }

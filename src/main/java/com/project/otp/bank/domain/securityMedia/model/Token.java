@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class Token {
 
     @Id
-    private String usisNo; // 이용기관번호 10 pk
+    private long usisNo; // 이용기관번호 10 pk
 
     private long isncSrn; // 발급일련번호 5 pk
 
@@ -32,10 +32,10 @@ public class Token {
     @JoinColumn(name = "secu_cdn")
     private SecurityMedia securityMedia;   // 보안매체
 
-    @Builder
-    public Token(String usisNo, String tknNo, LocalDateTime isncTs, LocalDateTime expyTs, LocalDateTime sysLsmdTs) {
+    public Token(Long usisNo, String tknNo, LocalDateTime isncTs, LocalDateTime expyTs, LocalDateTime sysLsmdTs) {
         this.usisNo = usisNo;
         this.tknNo = tknNo;
+        this.tokenStatus = TokenStatus.ACTIVATE;
         this.isncTs = isncTs;
         this.expyTs = expyTs;
         this.sysLsmdTs = sysLsmdTs;

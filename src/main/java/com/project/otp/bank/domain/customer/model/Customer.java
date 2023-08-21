@@ -2,6 +2,7 @@ package com.project.otp.bank.domain.customer.model;
 
 import com.project.otp.bank.domain.external.model.ExternalTrnInfo;
 import com.project.otp.bank.domain.securityMedia.model.SecurityMedia;
+import com.project.otp.bank.domain.securityMedia.model.SecurityMediaType;
 import com.project.otp.bank.presentation.dto.OtpRegRqst;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -56,15 +58,18 @@ public class Customer {
         this.cpn = cpn;
     }
 
-    public static Customer ofCustomer(OtpRegRqst otpRegRqst) {
-        return new Customer(otpRegRqst.getCustName(), otpRegRqst.getRnn(), otpRegRqst.getCpn());
-    }
-
     public boolean existActiveSecurityMedia() {
         if(securityMedia != null
                 && securityMedia.stream().filter(s -> s.getSccdScd().equals("REGISTER")).findAny().isPresent()) {
             throw new RuntimeException("이미 기등록된 보안매체가 등록되어있습니다. 보안매체 해제 후 등록 거래하세요.");
         }
         return false;
+    }
+
+    public SecurityMedia getActiveSecurityMedia(SecurityMediaType type) {
+        SecurityMedia activeOtp = securityMedia.stream().filter(s -> s.getSecuType() == type)
+                .filter(s -> s.getSccdScd().equals("REGISTER"))
+                .findAny().orElseThrow(() -> new RuntimeException("유효한 보안매체가 존재하지 않습니다."));
+
     }
 }

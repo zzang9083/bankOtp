@@ -1,6 +1,7 @@
 package com.project.otp.bank.common.exception;
 
-import dev.practice.order.common.response.ErrorCode;
+
+import com.project.otp.bank.common.response.ErrorCode;
 import lombok.Getter;
 
 /**

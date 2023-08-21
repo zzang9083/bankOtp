@@ -42,7 +42,7 @@ public class SecurityMedia {
 
 
     @OneToMany(mappedBy = "securityMedia", fetch = LAZY)
-    private List<Token> token;    // 토큰
+    private List<Token> token = new ArrayList<>();    // 토큰
 
     @OneToMany(mappedBy = "securityMedia") // 보안매체 이력
     private List<SecurityMediaHistory> securityMediaHistoryList = new ArrayList<>();
@@ -84,7 +84,7 @@ public class SecurityMedia {
         }
         else {
             activateToken = token.stream()
-                    .filter(s -> s.getTokenStatus().equals("ACTIVATE"))
+                    .filter(s -> s.getTokenStatus() == TokenStatus.ACTIVATE)
                     .limit(1).collect(Collectors.toList());
             if(activateToken.isEmpty()) {
                 throw new RuntimeException("발급된 토큰이 없습니다.");

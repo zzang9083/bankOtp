@@ -1,10 +1,10 @@
-package com.project.otp.bank.infrastructure.external.client.builder.otp.dto;
+package com.project.otp.bank.infrastructure.external.client.otp.dto;
 
 import com.project.otp.bank.domain.customer.model.Customer;
 import com.project.otp.bank.domain.external.model.ExternalCommConst;
 import com.project.otp.bank.domain.securityMedia.model.SecurityMedia;
-import com.project.otp.bank.infrastructure.external.client.builder.otp.comm.OtpCommInfo;
-import com.project.otp.bank.infrastructure.external.client.builder.otp.comm.OtpConst;
+import com.project.otp.bank.infrastructure.external.client.otp.comm.OtpCommInfo;
+import com.project.otp.bank.infrastructure.external.client.otp.comm.OtpConst;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -26,7 +26,7 @@ public class OtpRegRqstRqst {
 
     private LocalDateTime rgsnTs;      // 등록일시
 
-    private OtpCommInfo OtpCommInfo; // 거래 공통부
+    private com.project.otp.bank.infrastructure.external.client.otp.comm.OtpCommInfo OtpCommInfo; // 거래 공통부
 
     public OtpRegRqstRqst(Customer customer, SecurityMedia newOtp) {
         this.prfmNm         = customer.getCustName();

@@ -1,4 +1,4 @@
-package com.project.otp.bank.infrastructure.external.client.builder.otp.comm;
+package com.project.otp.bank.infrastructure.external.client.otp.comm;
 
 import com.project.otp.bank.domain.external.model.ExternalCommConst;
 
@@ -29,6 +29,8 @@ public class OtpConst {
     //otp 공동센터 PATH URL
     public static final String OTP_API_PATH_OTP_REG   = "/kftc/otp/register";             // 거래구분코드 OTP등록 요청
     public static final String OTP_API_PATH_OTP_TMN   = "/kftc/otp/terminate";            // 거래구분코드 OTP해지 요청
+
+    public static final String OTP_API_PATH_OTP_AUTH_S1   = "/kftc/otp/auth/s1";            // 거래구분코드 OTP해지 요청
 
     // 대외거래구분코드
     public static final String OTP_TRN_DSNC_NO_100101   = "100101";             // 거래구분코드 OTP등록 요청
@@ -76,6 +78,9 @@ public class OtpConst {
     // 대외거래구분코드
     public static final String EXT_TRN_OMSM   = "OMSM";                         // 대외거래구분코드 스마트 보안카드
 
+
+    // 응답코드
+    public static final String OTP_RPCD_0000   = "0000";                         // 성공 완료
 
 
 

@@ -1,7 +1,5 @@
-package com.project.otp.bank.infrastructure.external.client.builder;
+package com.project.otp.bank.infrastructure.external.client.comm.builder;
 
-import com.project.otp.bank.infrastructure.external.client.builder.otp.comm.ApiInfo;
-import com.project.otp.bank.infrastructure.external.client.frame.ClientRequestFrame;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -28,6 +26,7 @@ public abstract class ClientMonoBuilder {
                 .block();
     }
     protected abstract<Q> ClientRequestFrame frameOf(ApiInfo apiInfo, Q requestDto);
+
     //protected abstract Class<? extends PlaceResponse> supportType();
 
 }
