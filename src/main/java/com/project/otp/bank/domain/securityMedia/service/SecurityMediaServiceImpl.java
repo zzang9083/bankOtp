@@ -3,6 +3,8 @@ package com.project.otp.bank.domain.securityMedia.service;
 import com.project.otp.bank.domain.customer.model.Customer;
 import com.project.otp.bank.domain.customer.repository.CustomerReader;
 import com.project.otp.bank.domain.external.service.ExternalClientService;
+import com.project.otp.bank.domain.securityMedia.dto.SecurityMediaApiCommand;
+import com.project.otp.bank.domain.securityMedia.dto.SecurityMediaApiInfo;
 import com.project.otp.bank.domain.securityMedia.dto.SecurityMediaCommand;
 import com.project.otp.bank.domain.securityMedia.dto.SecurityMediaInfo;
 import com.project.otp.bank.domain.securityMedia.model.SecurityMedia;
@@ -50,7 +52,7 @@ public class SecurityMediaServiceImpl implements SecurityMediaService {
 
     @Override
     @Transactional
-    public void activateOtpStepFirst(SecurityMediaCommand.ActivateOtpStepFirst req) {
+    public SecurityMediaInfo.ActivateOtpStepFirst activateOtpStepFirst(SecurityMediaCommand.ActivateOtpStepFirst req) {
         // 요청고객 FIND
         Customer customer = customerReader.findCustomerById(req.getCustId());
 
@@ -58,10 +60,17 @@ public class SecurityMediaServiceImpl implements SecurityMediaService {
         SecurityMedia activeOtp = customer.getActiveSecurityMedia(SecurityMediaType.DIGITAL_OTP);
 
         // 대외거래 요청부 조립
-        SecurityMediaCommand.ActivateOtpStepFirstToExternal externalReq
-                = req.toApiCommand(customer.getRnn(), activeOtp.getSecuCdn());
+        SecurityMediaApiCommand.ActivateOtpStepFirstApiCommand apiReq
+                = req.toApiCommand(customer, activeOtp, req);
 
         // 1차 활성화 요청
-        externalClientService.reqActivateOtpStepFirst(externalReq);
+        SecurityMediaApiInfo.ActivateOtpStepFirst apiRepn
+                = externalClientService.reqActivateOtpStepFirst(apiReq);
+
+        // 공통부 보고 응답처리
+
+
+        return SecurityMediaInfo.ActivateOtpStepFirst.of(apiRepn);
+
     }
 }

@@ -67,7 +67,7 @@ public class Customer {
     }
 
     public SecurityMedia getActiveSecurityMedia(SecurityMediaType type) {
-        SecurityMedia activeOtp = securityMedia.stream().filter(s -> s.getSecuType() == type)
+        return securityMedia.stream().filter(s -> s.getSecuType() == type)
                 .filter(s -> s.getSccdScd().equals("REGISTER"))
                 .findAny().orElseThrow(() -> new RuntimeException("유효한 보안매체가 존재하지 않습니다."));
 

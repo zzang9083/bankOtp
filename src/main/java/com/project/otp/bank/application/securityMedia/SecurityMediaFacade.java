@@ -24,8 +24,8 @@ public class SecurityMediaFacade {
         return securityMediaService.issueSecurityMedia(req, SecurityMediaType.DIGITAL_OTP);
     }
 
-    public void activateOtpStepFirst(SecurityMediaCommand.ActivateOtpStepFirst req) { //인증 1차 활성화
-        securityMediaService.activateOtpStepFirst(req);
+    public SecurityMediaInfo.ActivateOtpStepFirst activateOtpStepFirst(SecurityMediaCommand.ActivateOtpStepFirst req) { //인증 1차 활성화
+        return securityMediaService.activateOtpStepFirst(req);
     }
 
 }

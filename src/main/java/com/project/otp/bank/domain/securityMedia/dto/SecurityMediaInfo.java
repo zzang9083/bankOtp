@@ -2,6 +2,7 @@ package com.project.otp.bank.domain.securityMedia.dto;
 
 import com.project.otp.bank.domain.customer.model.Customer;
 import com.project.otp.bank.domain.securityMedia.model.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -12,6 +13,8 @@ import java.util.List;
 
 
 public class SecurityMediaInfo {
+
+
 
     @Getter
     @ToString
@@ -46,5 +49,28 @@ public class SecurityMediaInfo {
             this.token = securityMedia.getActiveToken();
             this.securityMediaHistoryList = securityMedia.getSecurityMediaHistoryList();
         }
+    }
+
+    @Getter
+    @ToString
+    @Builder
+    public static class ActivateOtpStepFirst {
+
+        private long trnCode;         // 거래코드
+
+        private String otpStateCode; // otp상태코드
+
+        private int authErrCnt;      // 인증오류횟수
+
+
+
+        public static ActivateOtpStepFirst of(SecurityMediaApiInfo.ActivateOtpStepFirst apiRepn) {
+            return ActivateOtpStepFirst.builder()
+                    .trnCode(apiRepn.getTrnCode())
+                    .otpStateCode(apiRepn.getOtpStateCode())
+                    .authErrCnt(apiRepn.getAuthErrCnt())
+                    .build();
+        }
+    }
     }
 }

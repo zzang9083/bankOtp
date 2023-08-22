@@ -1,20 +1,17 @@
-package com.project.otp.bank.infrastructure.external.client.otp.dto;
+package com.project.otp.bank.domain.securityMedia.dto;
 
-import com.project.otp.bank.infrastructure.external.client.otp.comm.OtpCommInfo;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
-public class OtpActivateRspn {
+public class SecurityMediaApiCommand {
 
     @Getter
-    public static class StepFirst { // 1차 활성화
-        
-        private long trnCode;         // 거래코드  
-
-        private String otpStateCode; // otp상태코드
-
-        private int authErrCnt;      // 인증오류횟수
+    @Builder
+    @ToString
+    public static class ActivateOtpStepFirstApiCommand { // 1차 활성화 대외요청
 
         private String custName;    // 고객명
 
@@ -30,6 +27,6 @@ public class OtpActivateRspn {
 
         private String trnContent; // 거래내역
 
-        private OtpCommInfo otpCommInfo; // 거래 공통부
+
     }
 }

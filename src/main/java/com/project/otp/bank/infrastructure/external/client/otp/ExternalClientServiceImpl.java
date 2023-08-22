@@ -2,6 +2,8 @@ package com.project.otp.bank.infrastructure.external.client.otp;
 
 import com.project.otp.bank.domain.customer.model.Customer;
 import com.project.otp.bank.domain.external.service.ExternalClientService;
+import com.project.otp.bank.domain.securityMedia.dto.SecurityMediaApiCommand;
+import com.project.otp.bank.domain.securityMedia.dto.SecurityMediaApiInfo;
 import com.project.otp.bank.domain.securityMedia.dto.SecurityMediaCommand;
 import com.project.otp.bank.domain.securityMedia.model.SecurityMedia;
 import com.project.otp.bank.domain.securityMedia.model.Token;
@@ -9,6 +11,7 @@ import com.project.otp.bank.infrastructure.external.client.comm.builder.ClientMo
 import com.project.otp.bank.infrastructure.external.client.comm.builder.ApiInfo;
 import com.project.otp.bank.infrastructure.external.client.otp.comm.OtpConst;
 import com.project.otp.bank.infrastructure.external.client.otp.dto.OtpActivateRqst;
+import com.project.otp.bank.infrastructure.external.client.otp.dto.OtpActivateRspn;
 import com.project.otp.bank.infrastructure.external.client.otp.dto.OtpRegRqstRspn;
 import com.project.otp.bank.infrastructure.external.client.otp.dto.OtpRegRqstRqst;
 import lombok.extern.slf4j.Slf4j;
@@ -50,7 +53,7 @@ public class ExternalClientServiceImpl implements ExternalClientService {
     }
 
     @Override
-    public void reqActivateOtpStepFirst(SecurityMediaCommand.ActivateOtpStepFirstToExternal externalReq) {
+    public SecurityMediaApiInfo.ActivateOtpStepFirst reqActivateOtpStepFirst(SecurityMediaApiCommand.ActivateOtpStepFirstApiCommand externalReq) {
 
         //API 정보 조립
         ApiInfo regApiInfo = ApiInfo.builder()
@@ -58,12 +61,14 @@ public class ExternalClientServiceImpl implements ExternalClientService {
                 .path(OtpConst.OTP_API_PATH_OTP_AUTH_S1).build();
 
         //요청부 조립
-        OtpActivateRqst.stepFirst stepFirst
-                = OtpActivateRqst.stepFirst.ofStepFirst(externalReq.getRnn(), externalReq.getSecuCdn(), externalReq.getTrnContent());
+        OtpActivateRqst.StepFirst stepFirst
+                = OtpActivateRqst.StepFirst.ofStepFirst(externalReq);
 
-        //otp 등록요청
-        OtpRegRqstRspn otpRegRqstRspn
-                = clientMonoBuilders.buildFor(regApiInfo, stepFirst, OtpRegRqstRspn.class);
+        //otp 1차 활성화
+        OtpActivateRspn.StepFirst stepFirstRspn
+                = clientMonoBuilders.buildFor(regApiInfo, stepFirst, OtpActivateRspn.StepFirst.class);
 
+
+        return SecurityMediaApiInfo.ActivateOtpStepFirst.of(stepFirstRspn);
     }
 }

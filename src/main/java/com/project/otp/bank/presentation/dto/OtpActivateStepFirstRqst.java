@@ -9,12 +9,16 @@ public class OtpActivateStepFirstRqst {
     @NotEmpty(message = "custId 는 필수값입니다")
     private Long custId;    // 고객 아이디
 
+    @NotEmpty(message = "usageCd 는 필수값입니다")
+    private String usageCd;    // 사용용도
+
     @NotEmpty(message = "trnContent 는 필수값입니다")
     private String trnContent;    // 거래 내용
 
     public SecurityMediaCommand.ActivateOtpStepFirst toCommand() {
         return SecurityMediaCommand.ActivateOtpStepFirst.builder()
                 .custId(custId)
+                .usageCd(usageCd)
                 .trnContent(trnContent)
                 .build();
     }

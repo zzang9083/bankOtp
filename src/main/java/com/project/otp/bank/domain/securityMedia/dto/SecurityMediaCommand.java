@@ -42,36 +42,25 @@ public class SecurityMediaCommand {
 
         private Long custId;       // 고객아이디
 
+        private String usageCd;    // 사용용도
+
         private String trnContent; // 거래내역
 
-        public ActivateOtpStepFirstToExternal toApiCommand(String rnn, Long secuCdn) {
-            return ActivateOtpStepFirstToExternal.builder()
-                    .secuCdn(secuCdn)
-                    .rnn(rnn)
-                    .trnContent(trnContent)
+
+        public SecurityMediaApiCommand.ActivateOtpStepFirstApiCommand toApiCommand(Customer customer, SecurityMedia activeOtp, ActivateOtpStepFirst req) {
+            return SecurityMediaApiCommand.ActivateOtpStepFirstApiCommand.builder()
+                    .custName(customer.getCustName())
+                    .rnn(customer.getRnn())
+                    .cpn(customer.getCpn())
+                    .birtYmd(customer.getBirtYmd())
+                    .secuCdn(activeOtp.getSecuCdn())
+                    .usageCd(req.getUsageCd())
+                    .trnContent(req.getTrnContent())
                     .build();
+
         }
     }
 
-    @Getter
-    @Builder
-    @ToString
-    public static class ActivateOtpStepFirstToExternal { // 1차 활성화 대외요청
 
-        private String rnn;         // 고객아이디
-        private Long secuCdn;       // 보안매체번호
-        private String trnContent;  // 거래내용
-
-        public SecurityMedia toEntity(SecurityMediaType secuType, Customer customer) {
-            return SecurityMedia.builder()
-                    .secuType(secuType)
-                    .sccdScd(SecurityMediaStatus.REGISTER)
-                    .isncYmd(LocalDate.now())
-                    .expyYmd(LocalDate.of(9999,12,31))
-                    .sysLsmdTs(LocalDateTime.now())
-                    .customer(customer)
-                    .build();
-        }
-    }
 
 }

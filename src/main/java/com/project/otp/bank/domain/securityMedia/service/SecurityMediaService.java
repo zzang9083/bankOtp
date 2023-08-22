@@ -9,6 +9,6 @@ public interface SecurityMediaService {
 
     public SecurityMediaInfo.Main issueSecurityMedia(SecurityMediaCommand.RegisterSecurityMediaRequest req, SecurityMediaType type);
 
-    public void activateOtpStepFirst(SecurityMediaCommand.ActivateOtpStepFirst req);
+    public SecurityMediaInfo.ActivateOtpStepFirst activateOtpStepFirst(SecurityMediaCommand.ActivateOtpStepFirst req);
 
 }
