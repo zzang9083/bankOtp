@@ -72,5 +72,35 @@ public class SecurityMediaInfo {
                     .build();
         }
     }
+
+    @Getter
+    @ToString
+    @Builder
+    public static class ActivateOtpStepSecond {
+
+        private String custName;    // 고객명
+
+        private String rnn; // 실명번호(사업자번호)
+
+        private String cpn;     // 핸드폰번호
+
+        private LocalDate birtYmd; // 생년월일
+
+        private Long secuCdn; // 보안매체 일련번호
+
+        private String usageCd; // 사용용도(1: 접근매체, 2: 추가인증)
+
+        private String token; // 토큰값
+        public static ActivateOtpStepSecond of(SecurityMediaApiInfo.ActivateOtpStepSecond apiRepn) {
+            return ActivateOtpStepSecond.builder()
+                    .custName(apiRepn.getCustName())
+                    .rnn(apiRepn.getRnn())
+                    .cpn(apiRepn.getCpn())
+                    .birtYmd(apiRepn.getBirtYmd())
+                    .secuCdn(apiRepn.getSecuCdn())
+                    .usageCd(apiRepn.getUsageCd())
+                    .token(apiRepn.getToken())
+                    .build();
+        }
     }
 }

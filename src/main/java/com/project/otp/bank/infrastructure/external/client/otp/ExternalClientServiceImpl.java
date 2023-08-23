@@ -71,4 +71,24 @@ public class ExternalClientServiceImpl implements ExternalClientService {
 
         return SecurityMediaApiInfo.ActivateOtpStepFirst.of(stepFirstRspn);
     }
+
+    @Override
+    public SecurityMediaApiInfo.ActivateOtpStepSecond reqActivateOtpStepSecond(SecurityMediaApiCommand.ActivateOtpStepSecondApiCommand externalReq) {
+
+        //API 정보 조립
+        ApiInfo regApiInfo = ApiInfo.builder()
+                .host(OtpConst.OTP_HOST_URL)
+                .path(OtpConst.OTP_API_PATH_OTP_AUTH_S2).build();
+
+        //요청부 조립
+        OtpActivateRqst.StepSecond stepSecond
+                = OtpActivateRqst.StepSecond.ofStepSecond(externalReq);
+
+        //otp 2차 활성화
+        OtpActivateRspn.StepSecond stepSecondRspn
+                = clientMonoBuilders.buildFor(regApiInfo, stepSecond, OtpActivateRspn.StepSecond.class);
+
+
+        return SecurityMediaApiInfo.ActivateOtpStepSecond.of(stepSecondRspn);
+    }
 }

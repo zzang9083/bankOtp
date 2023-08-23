@@ -69,7 +69,14 @@ public class Customer {
     public SecurityMedia getActiveSecurityMedia(SecurityMediaType type) {
         return securityMedia.stream().filter(s -> s.getSecuType() == type)
                 .filter(s -> s.getSccdScd().equals("REGISTER"))
-                .findAny().orElseThrow(() -> new RuntimeException("유효한 보안매체가 존재하지 않습니다."));
+                .findFirst().orElseThrow(() -> new RuntimeException("유효한 보안매체가 존재하지 않습니다."));
 
+    }
+
+    public void verifyOwnOtp(SecurityMediaType type, Long inputSecuCdn) {
+        securityMedia.stream().filter(s -> s.getSecuType() == type)
+                .filter(s -> s.getSccdScd().equals("REGISTER"))
+                .filter(s -> s.getSecuCdn() == inputSecuCdn)
+                .findFirst().orElseThrow(() -> new RuntimeException("입력 보안매체번호와 고객 보안매체번호가 일치하지 않습니다."));
     }
 }

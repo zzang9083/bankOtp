@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -19,8 +20,13 @@ public class SecurityMediaCommand {
     @ToString
     public static class RegisterSecurityMediaRequest { // 등록요청
 
+        @NotEmpty(message = "custName 는 필수값입니다")
         private String custName;    // 고객명
+
+        @NotEmpty(message = "rnn 는 필수값입니다")
         private String rnn;         // 실명번호(사업자번호)
+
+        @NotEmpty(message = "cpn 는 필수값입니다")
         private String cpn;         // 휴대번호
 
         public SecurityMedia toEntity(SecurityMediaType secuType, Customer customer) {
@@ -56,6 +62,36 @@ public class SecurityMediaCommand {
                     .secuCdn(activeOtp.getSecuCdn())
                     .usageCd(req.getUsageCd())
                     .trnContent(req.getTrnContent())
+                    .build();
+
+        }
+    }
+
+    @Getter
+    @Builder
+    @ToString
+    public static class ActivateOtpStepSecond { // 2차 활성화 요청
+
+        private Long custId;    // 고객 아이디
+
+        private Long secuCdn;   // 보안매체 일련번호
+
+        private String usageCd;    // 사용용도
+
+        private String cpn;     // 핸드폰번호
+
+        private String token;   // 토큰값
+
+
+        public SecurityMediaApiCommand.ActivateOtpStepSecondApiCommand toApiCommand(Customer customer, ActivateOtpStepSecond req) {
+            return SecurityMediaApiCommand.ActivateOtpStepSecondApiCommand.builder()
+                    .custName(customer.getCustName())
+                    .rnn(customer.getRnn())
+                    .cpn(customer.getCpn())
+                    .birtYmd(customer.getBirtYmd())
+                    .secuCdn(req.getSecuCdn())
+                    .usageCd(req.getUsageCd())
+                    .token(req.getToken())
                     .build();
 
         }

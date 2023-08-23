@@ -11,4 +11,5 @@ public interface SecurityMediaService {
 
     public SecurityMediaInfo.ActivateOtpStepFirst activateOtpStepFirst(SecurityMediaCommand.ActivateOtpStepFirst req);
 
+    public SecurityMediaInfo.ActivateOtpStepSecond activateOtpStepSecond(SecurityMediaCommand.ActivateOtpStepSecond req);
 }
