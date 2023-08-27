@@ -30,4 +30,9 @@ public class SecurityMediaFacade {
         // 인증 2차 활성화
         return securityMediaService.activateOtpStepSecond(req);
     }
+
+    public SecurityMediaInfo.VrfyVrfcCd vrfyVrfcCd(SecurityMediaCommand.VrfyVrfcCdRqst req) {    // 인증번호 검증
+        // 인증번호 검증
+        return securityMediaService.vrfyVrfcCdRqst(req);
+    }
 }

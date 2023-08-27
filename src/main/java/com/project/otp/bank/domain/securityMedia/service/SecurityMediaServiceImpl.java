@@ -95,4 +95,27 @@ public class SecurityMediaServiceImpl implements SecurityMediaService {
         return SecurityMediaInfo.ActivateOtpStepSecond.of(apiRepn);
 
     }
+
+    @Override
+    @Transactional
+    public SecurityMediaInfo.VrfyVrfcCd vrfyVrfcCdRqst(SecurityMediaCommand.VrfyVrfcCdRqst req) {
+        // 요청고객 FIND
+        Customer customer = customerReader.findCustomerById(req.getCustId());
+
+        // 본인otp 검증
+        customer.verifyOwnOtp(SecurityMediaType.DIGITAL_OTP, req.getSecuCdn());
+
+        // 대외거래 요청부 조립
+        SecurityMediaApiCommand.VrfyVrfcCdApiCommand apiReq
+                = req.toApiCommand(customer, req);
+
+        // 2차 활성화 요청
+        SecurityMediaApiInfo.VrfyVrfcCd apiRepn
+                = externalClientService.reqVrfyVrfcCd(apiReq);
+
+        // 공통부 보고 응답처리
+
+        return SecurityMediaInfo.VrfyVrfcCd.of(apiRepn);
+
+    }
 }

@@ -90,7 +90,12 @@ public class SecurityMediaInfo {
 
         private String usageCd; // 사용용도(1: 접근매체, 2: 추가인증)
 
+        private String trnContent; // 거래내역
+
+        private Long vrfcCd;       // 인증코드
+
         private String token; // 토큰값
+
         public static ActivateOtpStepSecond of(SecurityMediaApiInfo.ActivateOtpStepSecond apiRepn) {
             return ActivateOtpStepSecond.builder()
                     .custName(apiRepn.getCustName())
@@ -99,8 +104,48 @@ public class SecurityMediaInfo {
                     .birtYmd(apiRepn.getBirtYmd())
                     .secuCdn(apiRepn.getSecuCdn())
                     .usageCd(apiRepn.getUsageCd())
+                    .trnContent(apiRepn.getTrnContent())
+                    .vrfcCd(apiRepn.getVrfcCd())
                     .token(apiRepn.getToken())
                     .build();
         }
     }
+
+        @Getter
+        @ToString
+        @Builder
+        public static class VrfyVrfcCd {
+
+            private String custName;    // 고객명
+
+            private String rnn; // 실명번호(사업자번호)
+
+            private String cpn;     // 핸드폰번호
+
+            private LocalDate birtYmd; // 생년월일
+
+            private Long secuCdn; // 보안매체 일련번호
+
+            private String usageCd; // 사용용도(1: 접근매체, 2: 추가인증)
+
+            private long trnCode;         // 거래코드
+
+            private Long vrfcCd;    // 인증코드
+
+            private LocalDateTime trnReqAt;     // 거래요청일시
+
+            public static VrfyVrfcCd of(SecurityMediaApiInfo.VrfyVrfcCd apiRepn) {
+                return VrfyVrfcCd.builder()
+                        .custName(apiRepn.getCustName())
+                        .rnn(apiRepn.getRnn())
+                        .cpn(apiRepn.getCpn())
+                        .birtYmd(apiRepn.getBirtYmd())
+                        .secuCdn(apiRepn.getSecuCdn())
+                        .usageCd(apiRepn.getUsageCd())
+                        .trnCode(apiRepn.getTrnCode())
+                        .trnReqAt(apiRepn.getTrnReqAt())
+                        .vrfcCd(apiRepn.getVrfcCd())
+                        .build();
+            }
+        }
 }

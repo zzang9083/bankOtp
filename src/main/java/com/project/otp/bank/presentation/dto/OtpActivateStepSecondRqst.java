@@ -17,7 +17,6 @@ public class OtpActivateStepSecondRqst {
     @NotEmpty(message = "cpn 는 필수값입니다")
     private String cpn;     // 핸드폰번호
 
-
     public SecurityMediaCommand.ActivateOtpStepSecond toCommand(String token) {
         return SecurityMediaCommand.ActivateOtpStepSecond.builder()
                 .custId(custId)
@@ -27,4 +26,5 @@ public class OtpActivateStepSecondRqst {
                 .token(token)
                 .build();
     }
+
 }

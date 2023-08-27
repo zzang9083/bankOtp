@@ -33,6 +33,7 @@ public class OtpConst {
     public static final String OTP_API_PATH_OTP_AUTH_S1   = "/kftc/otp/auth/s1";            // 거래구분코드 인증 1차 활성화 요청
     public static final String OTP_API_PATH_OTP_AUTH_S2   = "/kftc/otp/auth/s2";            // 거래구분코드 인증 1차 활성화 요청
 
+    public static final String OTP_API_PATH_OTP_AUTH_VRFY   = "/kftc/otp/auth/vrfy";        // 거래구분코드 인증 인증번호 검증
 
     // 대외거래구분코드
     public static final String OTP_TRN_DSNC_NO_100101   = "100101";             // 거래구분코드 OTP등록 요청

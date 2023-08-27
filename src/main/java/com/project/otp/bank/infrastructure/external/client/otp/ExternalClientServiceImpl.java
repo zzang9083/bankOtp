@@ -91,4 +91,23 @@ public class ExternalClientServiceImpl implements ExternalClientService {
 
         return SecurityMediaApiInfo.ActivateOtpStepSecond.of(stepSecondRspn);
     }
+
+    @Override
+    public SecurityMediaApiInfo.VrfyVrfcCd reqVrfyVrfcCd(SecurityMediaApiCommand.VrfyVrfcCdApiCommand externalReq) {
+        //API 정보 조립
+        ApiInfo regApiInfo = ApiInfo.builder()
+                .host(OtpConst.OTP_HOST_URL)
+                .path(OtpConst.OTP_API_PATH_OTP_AUTH_VRFY).build();
+
+        //요청부 조립
+        OtpActivateRqst.VrfyVrfcCd vrfyVrfcCd
+                = OtpActivateRqst.VrfyVrfcCd.ofVrfyVrfcCd(externalReq);
+
+        //otp 인증번호 검증
+        OtpActivateRspn.VrfyVrfcCd vrfyVrfcCdRspn
+                = clientMonoBuilders.buildFor(regApiInfo, vrfyVrfcCd, OtpActivateRspn.VrfyVrfcCd.class);
+
+
+        return SecurityMediaApiInfo.VrfyVrfcCd.of(vrfyVrfcCdRspn);
+    }
 }

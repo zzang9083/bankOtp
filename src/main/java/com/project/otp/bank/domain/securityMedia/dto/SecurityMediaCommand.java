@@ -97,6 +97,44 @@ public class SecurityMediaCommand {
         }
     }
 
+    @Getter
+    @Builder
+    @ToString
+    public static class VrfyVrfcCdRqst { // 인증번호 검증 요청
+
+        private Long custId;    // 고객 아이디
+
+        private Long secuCdn; // 보안매체 일련번호
+
+        private String usageCd;    // 사용용도
+
+        private String cpn;     // 핸드폰번호
+
+        private String token;   // 토큰번호
+
+        private long trnCode;         // 거래코드
+
+        private Long vrfcCd;    // 인증코드
+
+        private LocalDateTime trnReqAt;     // 거래요청일시
+
+        public SecurityMediaApiCommand.VrfyVrfcCdApiCommand toApiCommand(Customer customer, SecurityMediaCommand.VrfyVrfcCdRqst req) {
+            return SecurityMediaApiCommand.VrfyVrfcCdApiCommand.builder()
+                    .custName(customer.getCustName())
+                    .rnn(customer.getRnn())
+                    .cpn(customer.getCpn())
+                    .birtYmd(customer.getBirtYmd())
+                    .secuCdn(req.getSecuCdn())
+                    .usageCd(req.getUsageCd())
+                    .token(req.getToken())
+                    .trnCode(req.getTrnCode())
+                    .vrfcCd(req.getVrfcCd())
+                    .trnReqAt(req.getTrnReqAt())
+                    .build();
+
+        }
+    }
+
 
 
 }

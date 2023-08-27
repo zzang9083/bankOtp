@@ -15,4 +15,6 @@ public interface ExternalClientService {
     SecurityMediaApiInfo.ActivateOtpStepFirst reqActivateOtpStepFirst(SecurityMediaApiCommand.ActivateOtpStepFirstApiCommand externalReq);
 
     SecurityMediaApiInfo.ActivateOtpStepSecond reqActivateOtpStepSecond(SecurityMediaApiCommand.ActivateOtpStepSecondApiCommand externalReq);
+
+    SecurityMediaApiInfo.VrfyVrfcCd reqVrfyVrfcCd(SecurityMediaApiCommand.VrfyVrfcCdApiCommand externalReq);
 }

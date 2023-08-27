@@ -28,13 +28,22 @@ public class OtpAuthController {
         return CommonResponse.success(otpActivateStepFirstRspn);
     }
 
-    @PostMapping("/s2")
+    @PutMapping("/s2")
     public CommonResponse activateOtpS2(@RequestHeader("Accept-Token")String token, @RequestBody @Valid OtpActivateStepSecondRqst otpActivateStepSecondRqst) {
-        SecurityMediaCommand.ActivateOtpStepSecond stepSecondRequest = OtpActivateStepSecondRqst.toCommand(token);
+        SecurityMediaCommand.ActivateOtpStepSecond stepSecondRequest = otpActivateStepSecondRqst.toCommand(token);
         SecurityMediaInfo.ActivateOtpStepSecond repn = securityMediaFacade.activateOtpStepSecond(stepSecondRequest);
 
         OtpActivateStepSecondRspn otpActivateStepSecondRspn = new OtpActivateStepSecondRspn(repn);
-        return CommonResponse.success(otpActivateStepFirstRspn);
+        return CommonResponse.success(otpActivateStepSecondRspn);
+    }
+
+    @PutMapping("/vrfy")
+    public CommonResponse vrfyVrfcCd(@RequestHeader("Accept-Token")String token, @RequestBody @Valid OtpVrfyVrfcCdRqst otpVrfyVrfcCdRqst) {
+        SecurityMediaCommand.VrfyVrfcCdRqst rqst = otpVrfyVrfcCdRqst.toCommand(token);
+        SecurityMediaInfo.VrfyVrfcCd repn = securityMediaFacade.vrfyVrfcCd(rqst);
+
+        OtpVrfyVrfcCdRspn otpVrfyVrfcCdRspn = new OtpVrfyVrfcCdRspn(repn);
+        return CommonResponse.success(otpVrfyVrfcCdRspn);
     }
 
 
