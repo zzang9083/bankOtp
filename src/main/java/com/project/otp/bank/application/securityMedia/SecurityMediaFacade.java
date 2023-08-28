@@ -14,8 +14,6 @@ public class SecurityMediaFacade {
     private final SecurityMediaService securityMediaService;
     
 
-    
-
     public SecurityMediaInfo.Main registerOtp(SecurityMediaCommand.RegisterSecurityMediaRequest req) { //디지털otp 발급
         // 디지털 otp 발행
         return securityMediaService.issueSecurityMedia(req, SecurityMediaType.DIGITAL_OTP);

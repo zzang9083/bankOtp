@@ -56,7 +56,7 @@ public class SecurityMediaApiCommand {
     @Getter
     @Builder
     @ToString
-    public class VrfyVrfcCdApiCommand { // 인증번호 검증 요청
+    public static class VrfyVrfcCdApiCommand { // 인증번호 검증 요청
         private String custName;    // 고객명
 
         private String rnn; // 실명번호(사업자번호)

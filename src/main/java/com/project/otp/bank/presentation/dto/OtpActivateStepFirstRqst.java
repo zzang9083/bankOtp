@@ -1,12 +1,15 @@
 package com.project.otp.bank.presentation.dto;
 
 import com.project.otp.bank.domain.securityMedia.dto.SecurityMediaCommand;
+import lombok.Getter;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
+@Getter
 public class OtpActivateStepFirstRqst {
 
-    @NotEmpty(message = "custId 는 필수값입니다")
+    @NotNull(message = "custId 는 필수값입니다")
     private Long custId;    // 고객 아이디
 
     @NotEmpty(message = "usageCd 는 필수값입니다")

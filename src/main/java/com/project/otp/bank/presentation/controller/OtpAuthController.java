@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/otp/auth")
+@RequestMapping("/bank/otp/auth")
 public class OtpAuthController {
 
     private final SecurityMediaFacade securityMediaFacade;

@@ -2,6 +2,7 @@ package com.project.otp.bank.domain.customer.model;
 
 import com.project.otp.bank.domain.external.model.ExternalTrnInfo;
 import com.project.otp.bank.domain.securityMedia.model.SecurityMedia;
+import com.project.otp.bank.domain.securityMedia.model.SecurityMediaStatus;
 import com.project.otp.bank.domain.securityMedia.model.SecurityMediaType;
 import com.project.otp.bank.presentation.dto.OtpRegRqst;
 import lombok.AccessLevel;
@@ -67,14 +68,14 @@ public class Customer {
     }
 
     public SecurityMedia getActiveSecurityMedia(SecurityMediaType type) {
-        return securityMedia.stream().filter(s -> s.getSecuType() == type)
-                .filter(s -> s.getSccdScd().equals("REGISTER"))
+        return securityMedia.stream().filter(s -> s.getSecuType().equals(type))
+                .filter(s -> s.getSccdScd().equals(SecurityMediaStatus.REGISTER))
                 .findFirst().orElseThrow(() -> new RuntimeException("유효한 보안매체가 존재하지 않습니다."));
 
     }
 
     public void verifyOwnOtp(SecurityMediaType type, Long inputSecuCdn) {
-        securityMedia.stream().filter(s -> s.getSecuType() == type)
+        securityMedia.stream().filter(s -> s.getSecuType().equals(type))
                 .filter(s -> s.getSccdScd().equals("REGISTER"))
                 .filter(s -> s.getSecuCdn() == inputSecuCdn)
                 .findFirst().orElseThrow(() -> new RuntimeException("입력 보안매체번호와 고객 보안매체번호가 일치하지 않습니다."));
